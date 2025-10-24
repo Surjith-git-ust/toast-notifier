@@ -2,8 +2,9 @@ type ToastProps = {
   message: string;
   type: "success" | "error" | "info";
   onClose?: () => void;
+  id: string;
 };
-const Toast = ({ message, type, onClose }: ToastProps) => {
+const Toast = ({ message, type, onClose, id }: ToastProps) => {
   const getBackgroundColor = () => {
     switch (type) {
       case "success":
@@ -17,11 +18,16 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
     }
   };
   return (
-    <div className={`${getBackgroundColor()}`}>
+    <div className={`${getBackgroundColor()} toast-container`}>
       <div className="notification-details">
         <span className="flex-1">{message}</span>
-        <button onClick={onClose}>X</button>
       </div>
+      <button
+        onClick={(e) => onClose(e.target.id.split("-")[1])}
+        id={`button-${id}`}
+      >
+        X
+      </button>
     </div>
   );
 };

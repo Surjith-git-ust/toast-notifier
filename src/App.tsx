@@ -1,34 +1,50 @@
 import { useState } from "react";
 import Toast from "./components/Toast";
-import { TOAST_TYPES } from "./constants/constants";
+import { TOAST_TYPES, TOAST_SHOW_TIME } from "./constants/constants";
 import "./App.css";
 
 type ToastType = (typeof TOAST_TYPES)[keyof typeof TOAST_TYPES];
+type ToastMessageType = {
+  type: ToastType;
+  id: string;
+};
 
 function App() {
-  const [toastToShow, setToastToShow] = useState<string | null>(null);
-  const onClose = () => {
-    console.log("Toast closed");
+  const [toasts, setToasts] = useState<ToastMessageType[]>([]);
+
+  const removeToast = (id: string) => {
+    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
   };
-  const showToast = (type: ToastType) => {
-    setToastToShow(type);
+
+  const addToast = (type: ToastType) => {
+    const id = Date.now().toString();
+    setToasts((prevToasts) => [...prevToasts, { type, id }]);
+    setTimeout(() => {
+      removeToast(id);
+    }, TOAST_SHOW_TIME);
   };
+
   return (
     <>
       <h1>Toast Notification system</h1>
-      <div>
-        <button onClick={() => showToast(TOAST_TYPES.ERROR)}>Error</button>
-        <button onClick={() => showToast(TOAST_TYPES.WARNING)}>Warning</button>
-        <button onClick={() => showToast(TOAST_TYPES.INFO)}>Information</button>
+      <div className="button-group">
+        {Object.values(TOAST_TYPES).map((type) => (
+          <button key={type} onClick={() => addToast(type)}>
+            Show {type} Toast
+          </button>
+        ))}
       </div>
       <div>
-        {toastToShow && (
-          <Toast
-            message={`This is a ${toastToShow} message`}
-            type={toastToShow}
-            onClose={onClose}
-          />
-        )}
+        {toasts.map((toast) => {
+          return (
+            <Toast
+              message={`This is a ${toast.type} message`}
+              type={toast.type}
+              onClose={removeToast}
+              id={toast.id}
+            />
+          );
+        })}
       </div>
     </>
   );

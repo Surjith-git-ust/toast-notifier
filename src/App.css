@@ -4,3 +4,32 @@
   padding: 2rem;
   text-align: center;
 }
+.button-group{
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  margin-bottom: 10px;
+}
+.toast-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  min-width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+.bg-green{
+  background-color: rgb(141, 232, 141);
+}
+.bg-red{
+    background-color: rgb(244, 52, 52);
+}
+.bg-blue{
+    background-color: rgb(135, 206, 250);
+}
+.bg-gray{
+  background-color: rgb(229, 235, 235);
+}
