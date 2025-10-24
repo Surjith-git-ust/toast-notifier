@@ -1,4 +1,9 @@
-const Toast = ({ message, type, onClose }) => {
+type ToastProps = {
+  message: string;
+  type: "success" | "error" | "info";
+  onClose?: () => void;
+};
+const Toast = ({ message, type, onClose }: ToastProps) => {
   const getBackgroundColor = () => {
     switch (type) {
       case "success":

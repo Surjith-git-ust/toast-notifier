@@ -3,12 +3,14 @@ import Toast from "./components/Toast";
 import { TOAST_TYPES } from "./constants/constants";
 import "./App.css";
 
+type ToastType = (typeof TOAST_TYPES)[keyof typeof TOAST_TYPES];
+
 function App() {
   const [toastToShow, setToastToShow] = useState<string | null>(null);
   const onClose = () => {
     console.log("Toast closed");
   };
-  const showToast = (type: string) => {
+  const showToast = (type: ToastType) => {
     setToastToShow(type);
   };
   return (
