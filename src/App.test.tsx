@@ -12,7 +12,7 @@ describe("App", () => {
   it("renders all toast buttons", () => {
     render(<App />);
     const buttons = screen.getAllByRole("button");
-    expect(buttons.length).toBe(3);
+    expect(buttons.length).toBe(4);
   });
   it("shows a toast when a button is clicked and hides it when clicking the x button", async () => {
     render(<App />);

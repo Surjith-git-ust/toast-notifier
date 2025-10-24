@@ -1,18 +1,22 @@
+import { TOAST_TYPES } from "../constants/constants";
+
 type ToastProps = {
   message: string;
-  type: "success" | "error" | "info";
+  type: "success" | "error" | "info" | "warning";
   onClose: (id: string) => void;
   id: string;
 };
 const Toast = ({ message, type, onClose, id }: ToastProps) => {
   const getBackgroundColor = () => {
     switch (type) {
-      case "success":
+      case TOAST_TYPES.SUCCESS:
         return "bg-green";
-      case "error":
+      case TOAST_TYPES.ERROR:
         return "bg-red";
-      case "info":
+      case TOAST_TYPES.INFO:
         return "bg-blue";
+      case TOAST_TYPES.WARNING:
+        return "bg-purple";
       default:
         return "bg-gray";
     }
