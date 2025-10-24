@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { TOAST_TYPES } from "../constants/constants";
 
 type ToastProps = {
@@ -5,8 +6,15 @@ type ToastProps = {
   type: "success" | "error" | "info" | "warning";
   onClose: (id: string) => void;
   id: string;
+  toastShowTime: number;
 };
-const Toast = ({ message, type, onClose, id }: ToastProps) => {
+const Toast = ({ message, type, onClose, id, toastShowTime }: ToastProps) => {
+  useEffect(() => {
+    setTimeout(() => {
+      onClose(id);
+    }, toastShowTime);
+  }, []);
+
   const getBackgroundColor = () => {
     switch (type) {
       case TOAST_TYPES.SUCCESS:

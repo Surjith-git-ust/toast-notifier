@@ -4,5 +4,3 @@ export const TOAST_TYPES = {
   INFO: "info",
   SUCCESS: "success",
 } as const;
-
-export const TOAST_SHOW_TIME = 3000 as const

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Toast from "./components/Toast";
-import { TOAST_TYPES, TOAST_SHOW_TIME } from "./constants/constants";
+import { TOAST_TYPES } from "./constants/constants";
 import "./App.css";
 
 type ToastType = (typeof TOAST_TYPES)[keyof typeof TOAST_TYPES];
@@ -19,9 +19,6 @@ function App() {
   const addToast = (type: ToastType) => {
     const id = Date.now().toString();
     setToasts((prevToasts) => [...prevToasts, { type, id }]);
-    setTimeout(() => {
-      removeToast(id);
-    }, TOAST_SHOW_TIME);
   };
 
   return (
@@ -42,6 +39,7 @@ function App() {
               type={toast.type}
               onClose={removeToast}
               id={toast.id}
+              toastShowTime={3000}
             />
           );
         })}
