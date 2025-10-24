@@ -1,7 +1,7 @@
 type ToastProps = {
   message: string;
   type: "success" | "error" | "info";
-  onClose?: () => void;
+  onClose: (id: string) => void;
   id: string;
 };
 const Toast = ({ message, type, onClose, id }: ToastProps) => {
@@ -23,7 +23,9 @@ const Toast = ({ message, type, onClose, id }: ToastProps) => {
         <span className="flex-1">{message}</span>
       </div>
       <button
-        onClick={(e) => onClose(e.target.id.split("-")[1])}
+        onClick={(e) =>
+          onClose((e.target as HTMLButtonElement).id.split("-")[1])
+        }
         id={`button-${id}`}
       >
         X
